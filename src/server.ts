@@ -1,9 +1,11 @@
-import express from 'express';
+
+// Use ES6 import syntax consistently
+const express = require('express');
 import { ApolloServer, gql } from 'apollo-server-express';
 import { PrismaClient } from '@prisma/client';
 import dotenv from 'dotenv';
 import { DocumentNode } from 'graphql';
-
+const cors = require('cors');
 // Initialize environment variables
 dotenv.config();
 
@@ -76,14 +78,21 @@ async function startApolloServer(typeDefs: DocumentNode, resolvers: any): Promis
   const app = express();
   const server = new ApolloServer({ typeDefs, resolvers });
 
-  app.use((req, res, next) => {
+  app.use((_req: any, res: { header: (arg0: string, arg1: string) => void; }, next: () => void) => {
     res.header('Access-Control-Allow-Origin', 'https://studio.apollographql.com');
     res.header('Access-Control-Allow-Credentials', 'true');
     next();
   });
 
+  app.use(
+    cors({
+      optionsSuccessStatus: 200, //option sucess status
+      origin: "http://localhost:4000", //origin allowed to access the server
+    })
+  );
   await server.start();
-  applyMiddleware({ app });
+  server.applyMiddleware({ app });
+
   const PORT = process.env.PORT || 4000;
 
   app.listen({ port: PORT }, () =>

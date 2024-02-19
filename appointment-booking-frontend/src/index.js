@@ -3,10 +3,28 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache, createHttpLink, ApolloProvider } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context'; // Import setContext
 
-const client = new ApolloClient({
-  uri: 'http://localhost:5432/postgresql',
+
+
+
+const httpLink = createHttpLink({
+  uri: 'http://localhost:5432/postgresql', // Update with your server address and GraphQL endpoint
+});
+
+const authLink = setContext((_, { headers }) => {
+  // Add authentication headers if needed
+  return {
+    headers: {
+      ...headers,
+      // Add any additional headers here
+    }
+  }
+});
+
+export const client = new ApolloClient({
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
@@ -18,7 +36,4 @@ root.render(
   </ApolloProvider>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

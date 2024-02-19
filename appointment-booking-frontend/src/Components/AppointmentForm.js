@@ -1,8 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import './AppointmentForm.css';
-import Calendar from './Calendar';
-import TimePicker from 'react-time-picker';
+import Calendar from './Calendar'; // Import the Calendar component
 
 const BOOK_APPOINTMENT_MUTATION = gql`
   mutation BookAppointment($name: String!, $email: String!, $date: String!, $time: String!) {
@@ -12,10 +11,6 @@ const BOOK_APPOINTMENT_MUTATION = gql`
   }
 `;
 
-/**
- * Renders a form for booking appointments.
- * @returns {JSX.Element} The rendered AppointmentForm component.
- */
 function AppointmentForm() {
   const [formState, setFormState] = useState({ name: '', email: '', date: '', time: '' });
   const [mutate] = useMutation(BOOK_APPOINTMENT_MUTATION, {
@@ -26,35 +21,18 @@ function AppointmentForm() {
     },
   });
 
-  /**
-   * Handles the booking of an appointment.
-   * Calls the mutate function to perform the mutation and logs a success message if successful, or an error message if there is an error.
-   */
   const bookAppointment = useCallback(async () => {
-    try {
-      await mutate({
-        variables: formState,
-      });
-      console.log('Appointment booked successfully!');
-    } catch (error) {
-      console.error('Error booking appointment:', error);
-    }
+    await mutate({
+      variables: formState,
+    });
   }, [mutate, formState]);
 
-  /**
-   * Updates the form state with the selected date.
-   * @param {string} date - The selected date.
-   */
-  const handleDateSelect = (date) => {
-    setFormState({ ...formState, date });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormState(prevState => ({ ...prevState, [name]: value }));
   };
-
-  /**
-   * Updates the form state with the selected time.
-   * @param {string} time - The selected time.
-   */
-  const handleTimeSelect = (time) => {
-    setFormState({ ...formState, time });
+  const handleDateSelect = (date) => {
+    setFormState({ ...formState, date }); // Update form state with selected date
   };
 
   return (
@@ -71,7 +49,7 @@ function AppointmentForm() {
             name="name"
             placeholder="Name"
             value={formState.name}
-            onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+            onChange={handleInputChange}
             className="form-input"
           />
         </div>
@@ -81,11 +59,12 @@ function AppointmentForm() {
             name="email"
             placeholder="Email"
             value={formState.email}
-            onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+            onChange={handleInputChange}
             className="form-input"
           />
         </div>
         <div className="form-group">
+          {/* Render the Calendar component and pass handleDateSelect as a prop */}
           <Calendar onDateSelect={handleDateSelect} />
         </div>
         <div className="form-group">
@@ -94,7 +73,7 @@ function AppointmentForm() {
             name="time"
             placeholder="Time"
             value={formState.time}
-            onChange={(e) => setFormState({ ...formState, time: e.target.value })}
+            onChange={handleInputChange}
             className="form-input"
           />
         </div>
