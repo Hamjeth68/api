@@ -8,23 +8,8 @@ import { setContext } from '@apollo/client/link/context'; // Import setContext
 
 
 
-
-const httpLink = createHttpLink({
-  uri: 'http://localhost:5432/postgresql', // Update with your server address and GraphQL endpoint
-});
-
-const authLink = setContext((_, { headers }) => {
-  // Add authentication headers if needed
-  return {
-    headers: {
-      ...headers,
-      // Add any additional headers here
-    }
-  }
-});
-
-export const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/graphql',
   cache: new InMemoryCache(),
 });
 
