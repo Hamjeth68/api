@@ -1,7 +1,9 @@
+// AppointmentForm.js
+
 import React, { useState, useCallback } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import './AppointmentForm.css';
-import Calendar from './Calendar'; // Import the Calendar component
+import Calendar from './Calendar';
 
 const BOOK_APPOINTMENT_MUTATION = gql`
   mutation BookAppointment($name: String!, $email: String!, $date: String!, $time: String!) {
@@ -13,36 +15,31 @@ const BOOK_APPOINTMENT_MUTATION = gql`
 
 function AppointmentForm() {
   const [formState, setFormState] = useState({ name: '', email: '', date: '', time: '' });
-  const [mutate] = useMutation(BOOK_APPOINTMENT_MUTATION, {
-    context: {
-      fetchOptions: {
-        credentials: 'include',
-      },
-    },
-  });
+  const [bookAppointment] = useMutation(BOOK_APPOINTMENT_MUTATION);
 
-  const bookAppointment = useCallback(async () => {
-    await mutate({
-      variables: formState,
-    });
-  }, [mutate, formState]);
+  const onSubmit = async () => {
+    try {
+      const { data } = await bookAppointment({ variables: { ...formState } });
+      console.log('Appointment booked:', data);
+      // Optionally, display a success message to the user
+    } catch (error) {
+      console.error('Appointment booking error:', error);
+      // Optionally, display an error message to the user
+    }
+  };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = useCallback((e) => {
     const { name, value } = e.target;
     setFormState(prevState => ({ ...prevState, [name]: value }));
-  };
-  const handleDateSelect = (date) => {
-    setFormState({ ...formState, date }); // Update form state with selected date
-  };
+  }, [setFormState]);
+
+  const handleDateSelect = useCallback((date) => {
+    setFormState({ ...formState, date });
+  }, [formState, setFormState]);
 
   return (
     <div className="form-container">
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          bookAppointment();
-        }}
-      >
+      <form onSubmit={(e) => { e.preventDefault(); onSubmit(); }}>
         <div className="form-group">
           <input
             type="text"
@@ -64,7 +61,6 @@ function AppointmentForm() {
           />
         </div>
         <div className="form-group">
-          {/* Render the Calendar component and pass handleDateSelect as a prop */}
           <Calendar onDateSelect={handleDateSelect} />
         </div>
         <div className="form-group">
