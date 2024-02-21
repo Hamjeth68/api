@@ -8,9 +8,13 @@ datasource db {
 }
 
 model Appointment {
-  id    Int    @id @default(autoincrement())
-  name  String
-  email String
-  date  String
-  time  String
+  id             Int     @id @default(autoincrement())
+  name           String
+  email          String
+  date           String
+  time           String
+  build          String  // Corrected type to String
+  whatToBuild    String  
+  website        String  
+  contactNumber  String   
 }
