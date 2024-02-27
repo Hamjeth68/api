@@ -1,64 +1,13 @@
-// server.ts
-
 const express = require("express");
-import { ApolloServer, gql } from "apollo-server-express";
-import { PrismaClient } from "@prisma/client";
+import { ApolloServer } from "apollo-server-express";
 import dotenv from "dotenv";
-import { DocumentNode } from "graphql";
 import cors from "cors";
+import typeDefs from "./GraphQL/typeDefs";
+import resolvers from "./GraphQL/resolvers";
 
 dotenv.config();
 
-const prisma = new PrismaClient();
-
-const typeDefs = gql`
-  type Query {
-    getAppointments: [Appointment!]!
-  }
-
-  type Mutation {
-    bookAppointment(
-      name: String!
-      email: String!
-      date: String!
-      time: String!
-    ): Appointment!
-  }
-
-  type Appointment {
-    id: ID!
-    name: String!
-    email: String!
-    date: String!
-    time: String!
-  }
-`;
-
-const resolvers = {
-  Mutation: {
-    bookAppointment: async (
-      _parent: any,
-      args: any,
-      _context: any,
-      _info: any
-    ) => {
-      const { name, email, date, time } = args;
-      return await prisma.appointment.create({
-        data: {
-          name,
-          email,
-          date,
-          time,
-        },
-      });
-    },
-  },
-};
-
-async function startApolloServer(
-  typeDefs: DocumentNode,
-  resolvers: any
-): Promise<void> {
+async function startApolloServer(): Promise<void> {
   const app = express();
   const server = new ApolloServer({ typeDefs, resolvers });
 
@@ -74,4 +23,4 @@ async function startApolloServer(
   );
 }
 
-startApolloServer(typeDefs, resolvers);
+startApolloServer();

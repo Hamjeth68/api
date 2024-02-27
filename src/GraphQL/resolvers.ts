@@ -1,22 +1,25 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 const resolvers = {
-    Query: {
-        appointments: async () => {
-            return await prisma.appointment.findMany();
-        },
+  Mutation: {
+    bookAppointment: async (
+      _parent: any,
+      args: any,
+      _context: any,
+      _info: any
+    ) => {
+      return await prisma.appointment.create({
+        data: args,
+      });
     },
-    Mutation: {
-        bookConsultation: async (_: any, { input }: any) => {
-            const appointment = await prisma.appointment.create({
-                data: input,
-            });
-            // Send email notifications here
-            return appointment;
-        },
+  },
+  Query: {
+    getAppointments: async () => {
+      return await prisma.appointment.findMany();
     },
+  },
 };
 
 export default resolvers;
