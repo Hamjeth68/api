@@ -4,6 +4,7 @@ import React, { useState, useCallback } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import './AppointmentForm.css';
 import Calendar from './Calendar';
+import AppointmentScheduler from './Calendar';
 
 const BOOK_APPOINTMENT_MUTATION = gql`
   mutation BookAppointment($name: String!, $email: String!, $date: String!, $time: String!) {
@@ -61,7 +62,7 @@ function AppointmentForm() {
           />
         </div>
         <div className="form-group">
-          <Calendar onDateSelect={handleDateSelect} />
+          <AppointmentScheduler onChange={handleDateSelect}  />
         </div>
         <div className="form-group">
           <input
