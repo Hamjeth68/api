@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import './AppointmentForm.css';
 import Calendar from './Calendar';
+import { apiCalendar } from '../config';
 
 const BOOK_APPOINTMENT_MUTATION = gql`
   mutation BookAppointment(
@@ -48,19 +49,38 @@ function AppointmentForm() {
     try {
       const { data } = await bookAppointment({ variables: { ...formState } });
       console.log('Appointment booked:', data);
+  
+      // Create event object
+      const event = {
+        summary: `Appointment with ${formState.name}`,
+        start: {
+          dateTime: `${formState.date}T${formState.time}:00`, // Add ":00" to format time as HH:mm:ss
+          timeZone: 'Europe/Paris', // Update with your time zone
+        },
+        end: {
+          dateTime: `${formState.date}T${formState.time}:00`, // Add ":00" to format time as HH:mm:ss
+          timeZone: 'Europe/Paris', // Update with your time zone
+        },
+      };
+  
+      // Create Google Calendar event
+      const calendarEventResult = await apiCalendar.createEventFromNow(event);
+      console.log('Calendar event created:', calendarEventResult);
+  
     } catch (error) {
       console.error('Appointment booking error:', error);
     } finally {
       setLoading(false); // Reset loading to false after mutation call
     }
   }, [bookAppointment, formState]);
+  
 
-  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = useCallback((e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
     setFormState(prevState => ({ ...prevState, [name]: value }));
   }, []);
 
-  const handleDateSelect = useCallback((date: string) => {
+  const handleDateSelect = useCallback((date: any) => {
     setFormState(prevState => ({ ...prevState, date }));
   }, []);
 
@@ -88,7 +108,7 @@ function AppointmentForm() {
           />
         </div>
         <div className="form-group">
-          <Calendar />
+          <Calendar onDateSelect={handleDateSelect} />
         </div>
         <div className="form-group">
           <input

@@ -10,7 +10,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --config nodemon.json src/server.ts"
   },
-  
   "author": "Hamjeth Misree",
   "license": "ISC",
   "devDependencies": {
@@ -37,6 +36,7 @@
   },
   "dependencies": {
     "@apollo/explorer": "^3.6.0",
+    "@googleapis/docs": "^3.0.0",
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
@@ -44,6 +44,7 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dayjs": "^1.11.10",
+    "googleapis": "^133.0.0",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "nanoid": "^5.0.6",

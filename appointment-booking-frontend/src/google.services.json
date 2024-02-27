@@ -1,0 +1,14 @@
+{
+    "type": "service_account",
+    "project_id": "nativex-415022",
+    "private_key_id": "38c20c96edac541ab6283f79fdeb8fdad29088c7",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCuUpX0ZR/PTBeO\nCb2X5UOieh44BI4TSCusIaCYHFxEtjfVpH+3uvlxFTQD+Im3w9xfPOYkYepYkaZL\nqblBy1geSKqmRW4nylJslf5SwJnBnuMy1uDyeB8YIAGS5kbzpkU3E3ly3w9KWZlH\n1JxyerbYmFKdE9Ve4sxDeO00gihoBzViudTTL6uoN1eVi+bmV/ep6rvHiXjt/dND\nvn4atuDYP1fF70xYlD/ZmMfmVywQqR6IRQFJfjoVS41C/76DM0XI2EDLK7bnMWir\nBfDmPYsTA5Z+3y/YpGB/L4rOpexDWjPNRbbww0DsGaHEKRJYhAHI6EcLB7jOHK0G\nCi//LnNpAgMBAAECggEABEq58Lo22gfHOOLiNUKHbR4a4kMXpcxiia3YElHfO+Om\n0ZHONJcVi9RbXNfdhikVliew7+DhE1ZErqGELOVFhMgoh9VdexY2+/+5mWgVPdUV\n+W5QCNA7Z1pN+tCq59YZmqh8iaVwLvx9P5PYJTs1ulsnuScGaBXNgY5eFetr2ygv\neYdWjAvlFVT/n2dQd80H60dEv7t/5kfBaVYNh5jKgY+GlBpSKXDPWa6xXdvaz4kS\nh1M1WeCfSAO8BxHdKRiTU39wAg5IFh9MDK1vgMevOUfCiAtY002USIyTEERlLbkP\ndcjhTQN8NH7O5MLz3l21o24psTTY3Xl3oBYuRGbQPQKBgQDWEMGfr8to2FUpsvR9\nDYI9WOwWOn96aZymKvTGH5bYTw24jo2+2SxzwB/PUJJKf2sdz0pasoXAdBLJurlR\nZcCTFvNKTt9SBVUxojIeimu6EFFPopsL8oEozkqJiJm2TrQepHnONxRsjwRCnTQm\nbdZhpEhpq/d5PFxZ3pe5wdIiRQKBgQDQeMBG8SN2A53GF39blNW9kT6c0x4nhGD4\noWeaYjd9f0PMOP3TsX9sMWQdpZuGNOYg9kMe7s6YrEkXPR70pUq2jfLYJsjGI1UX\ngWysormg8XgKRNUDoNXyM/OPR8SJ1ZwAs48XKDiWga7z689rF7tvln/4oiUj0yj/\nltKrpW8w1QKBgQCwieEk8LWwIbkaSpuXBi0CqvMI4fV/3tlxsLttKWAdxBRswCPl\n4PToAOo67xe2mJ6eVvXbFp93uEJGW9e5aVEH/UVnYuSJoBxCcqEizsVJDWwBYPi9\nQaGDJZ4TDrS1xPKG0t4hUwtk/A1nYn4/sxW6MOIHQ+sz8LO46fn3GAFUgQKBgBPG\nsK7KJ0wFsczd48YDS3dtNNxZpq2nAC/118csdAkiroLMEUAowWa5FL8/O46yq/YK\nhnmDu/N9vH1I3gvlNj41HwlkPH2XUnYlX/LMiQF8hp+qwe5TLpiIVx2LeFh+/AqQ\n/gz7UsrsSHV5NDb7jFtcko06jH1mhaghXaDM08x1AoGBAJuWY/R8mQQ8BJDjBP3m\nhnyYCNArYtS7cA7/GZ6LMzjW/dWQlsnKkVuSUPmZp6AMaYavR2OzS/0/dZrMTPOw\nqS9v8cUYRUjjAFES6jM4a6iFAxFaucIgwfWAB2KEmR/wpG72KzqbiYtmIMyJeBnY\nVjuGnWD8HOVC2qXN02orp+KY\n-----END PRIVATE KEY-----\n",
+    "client_email": "nativex@nativex-415022.iam.gserviceaccount.com",
+    "client_id": "109243824117548839388",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/nativex%40nativex-415022.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+  }
+  
